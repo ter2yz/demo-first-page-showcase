@@ -1,8 +1,9 @@
 import Image from "next/image";
 
-import ContactForm from "@/components/ContactForm";
-import FrankBodyImage from "@/assets/img_frank-body.jpg";
 import TeamMemberImage from "@/assets/img_elise-n-dan.png";
+import FrankBodyImage from "@/assets/img_frank-body.jpg";
+import ContactForm from "@/components/ContactForm";
+import GoogleMap from "@/components/Map";
 
 export default function ContactPage() {
   return (
@@ -54,7 +55,13 @@ export default function ContactPage() {
           />
         </div>
       </div>
-      <div className="h-48 w-full bg-white"></div>
+      <div className="w-full bg-white">
+        <GoogleMap
+          key="firstPage"
+          center={{ lat: -37.8327787, lng: 144.996298 }}
+          zoom={15}
+        />
+      </div>
     </main>
   );
 }
