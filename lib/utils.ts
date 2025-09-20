@@ -1,8 +1,7 @@
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { twMerge } from "tailwind-merge";
 
 import { type ClassValue, clsx } from "clsx";
-
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

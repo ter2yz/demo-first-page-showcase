@@ -4,7 +4,8 @@ import { useRouter } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
-import { FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 import {
   formatAustralianMobile,
@@ -12,8 +13,9 @@ import {
   stripNonDigits,
 } from "@/lib/utils";
 
-import { ContactFormData, contactSchema } from "../lib/validation";
-import { FieldError } from "./FieldError";
+import { ContactFormData, contactSchema } from "../../lib/validation";
+import { FieldError } from "../FieldError";
+import { FormLabel } from "./FormLabel";
 
 export default function ContactForm({
   endpoint,
@@ -42,18 +44,48 @@ export default function ContactForm({
 
   const [formattedContactNumber, setFormattedContactNumber] = useState("");
 
-  // Keep form and UI in sync when reset is called
   useEffect(() => {
-    reset();
-    setFormattedContactNumber("");
-  }, [reset]);
+    let timer: NodeJS.Timeout | null = null;
+    let cancelled = false;
 
-  useEffect(() => {
+    if (status === "success") {
+      toast.success("Form submit successfully!");
+    }
+
     if (status === "error") {
-      const timer = setTimeout(() => {
-        smartRedirect(router, thankYouUrl);
-      }, 2000);
-      return () => clearTimeout(timer);
+      const undo = () => {
+        cancelled = true;
+        if (timer) clearTimeout(timer);
+      };
+      toast.error(
+        () => (
+          <div className="relative w-full">
+            <p className="mb-2">
+              Error occurred while submitting the form. Redirecting in 5s...
+            </p>
+            <div className="animate-shrink h-2 w-full rounded-3xl bg-white"></div>
+          </div>
+        ),
+        {
+          classNames: {
+            toast: "relative",
+            content: "w-full",
+            title: "w-full",
+          },
+          action: {
+            label: "Undo",
+            onClick: undo,
+          },
+        }
+      );
+      timer = setTimeout(() => {
+        if (!cancelled) {
+          smartRedirect(router, thankYouUrl);
+        }
+      }, 5000);
+      return () => {
+        if (timer) clearTimeout(timer);
+      };
     }
   }, [status]);
 
@@ -76,6 +108,7 @@ export default function ContactForm({
         setStatus("success");
         setMessage("Message sent successfully!");
         reset();
+        setFormattedContactNumber("");
       } else {
         setStatus("error");
         setMessage(result.error || "Something went wrong.");
@@ -94,12 +127,7 @@ export default function ContactForm({
     <div className="w-full max-w-xl rounded-2xl bg-white px-6 pt-8 pb-6 shadow-[#454545/0.3] drop-shadow-lg xl:px-8 xl:pt-10 xl:pb-8">
       <form onSubmit={handleSubmit(onSubmit)} className="w-full" noValidate>
         <div className="mb-6">
-          <label
-            htmlFor="firstName"
-            className="mb-1 block leading-[1.25rem] font-bold text-[#00225d]"
-          >
-            First name*
-          </label>
+          <FormLabel htmlFor="firstName">First name*</FormLabel>
           <input
             id="firstName"
             type="text"
@@ -118,12 +146,7 @@ export default function ContactForm({
         </div>
 
         <div className="mb-6">
-          <label
-            htmlFor="email"
-            className="mb-1 block leading-[1.25rem] font-bold text-[#00225d]"
-          >
-            Email*
-          </label>
+          <FormLabel htmlFor="email">Email*</FormLabel>
           <input
             id="email"
             type="email"
@@ -142,12 +165,7 @@ export default function ContactForm({
         </div>
 
         <div className="mb-6">
-          <label
-            htmlFor="contactNumber"
-            className="mb-1 block leading-[1.25rem] font-bold text-[#00225d]"
-          >
-            Best contact number*
-          </label>
+          <FormLabel htmlFor="contactNumber">Best contact number*</FormLabel>
           <input
             id="contactNumber"
             type="text"
@@ -174,12 +192,7 @@ export default function ContactForm({
         </div>
 
         <div className="mb-6">
-          <label
-            htmlFor="companyWebsite"
-            className="mb-1 block leading-[1.25rem] font-bold text-[#00225d]"
-          >
-            Company website
-          </label>
+          <FormLabel htmlFor="companyWebsite">Company website</FormLabel>
           <input
             id="companyWebsite"
             type="url"
@@ -200,12 +213,7 @@ export default function ContactForm({
         </div>
 
         <div className="mb-6">
-          <label
-            htmlFor="message"
-            className="mb-1 block leading-[1.25rem] font-bold text-[#00225d]"
-          >
-            How can we help you?
-          </label>
+          <FormLabel htmlFor="message">How can we help you?</FormLabel>
           <textarea
             id="message"
             {...register("message")}
@@ -225,7 +233,7 @@ export default function ContactForm({
 
         <button
           type="submit"
-          className="w-full rounded-lg bg-[#ff5254] px-6 py-[0.6875rem] text-sm font-extrabold text-white uppercase xl:text-base"
+          className="w-full cursor-pointer rounded-lg bg-[#ff5254] px-6 py-[0.6875rem] text-sm font-extrabold text-white uppercase xl:text-base"
           disabled={isSubmitting}
           aria-label="Submit contact form to grow my business"
         >
@@ -235,20 +243,9 @@ export default function ContactForm({
           <span aria-hidden="true">
             {status === "loading"
               ? "Sending..."
-              : "yes, I WANT TO grow my business"}
+              : "yes, I want to grow my business"}
           </span>
         </button>
-
-        {status !== "idle" && (
-          <p
-            className={`mt-2 ${
-              status === "success" ? "text-green-600" : "text-red-600"
-            }`}
-          >
-            {message}
-            {status === "error" && " Redirecting..."}
-          </p>
-        )}
       </form>
     </div>
   );
