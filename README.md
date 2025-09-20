@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FirstPage Interview Assessment
 
-## Getting Started
+This project is an assessment for the FirstPage interview process.
 
-First, run the development server:
+## 🚀 Tech Stack
+
+- **Framework:** Next.js (App Router)
+- **Styling:** Tailwind CSS
+- **Type Checking:** TypeScript
+- **Form Validation:** React Hook Form + Zod
+- **Map Integration:** Google Maps via @vis.gl/react-google-maps
+- **Hosting:** Netlify
+
+## 🛠️ Getting Started
+
+Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build for production:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Lint and format code:
 
-## Learn More
+```bash
+npm run lint
+npm run format:fix
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 🌏 Environment Setup (Google Maps)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Copy `.env.example` to `.env.local` and fill in your Google Maps API credentials:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+cp .env.example .env.local
+```
 
-## Deploy on Vercel
+```
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_api_key_here
+NEXT_PUBLIC_GOOGLE_MAP_ID=your_map_id_here
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📬 Contact Form API Route Details
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The API route at `app/api/contact/route.ts` acts as a backend-for-frontend (BFF) for the contact form:
+
+- Handles POST requests from the contact form, performing basic validation and logging all requests and errors server-side.
+- Returns a mock success response (HTTP 200) or error (HTTP 400/500) for demonstration purposes.
+- Supports error simulation using the `forceError` query parameter (see `/contact-showcase` for an example of error handling in the UI).
+- Designed to be easily extended for real backend integration or additional server-side logic.
+
+## 📄 Pages
+
+- `/contact`: Standard contact form page (normal user flow).
+- `/contact-showcase`: Demonstrates error handling by forcing the API to return an error (for interview review).
+
+---
+
+Feel free to reach out if you have any questions or need further clarification!
