@@ -1,8 +1,9 @@
 import Image from "next/image";
 
-import ContactForm from "@/components/ContactForm";
-import FrankBodyImage from "@/assets/img_frank-body.jpg";
 import TeamMemberImage from "@/assets/img_elise-n-dan.png";
+import FrankBodyImage from "@/assets/img_frank-body.jpg";
+import ContactForm from "@/components/ContactForm";
+import GoogleMap from "@/components/Map";
 
 export default function ContactPage() {
   return (
@@ -13,8 +14,8 @@ export default function ContactPage() {
             Find out how we can grow your revenue!
           </h1>
           <p className="text-left text-[1.125rem] leading-[1.625rem] text-white xl:text-center xl:text-[1.25rem]">
-            Please enter your details below & we’ll get back to you within{" "}
-            <b>1 business day</b>.
+            Please enter your details below &amp; we&apos;ll get back to you
+            within <b>1 business day</b>.
           </p>
         </div>
         <div className="relative z-10 flex w-full flex-col gap-10 px-4 xl:flex-row xl:gap-20 xl:px-0">
@@ -51,7 +52,13 @@ export default function ContactPage() {
           />
         </div>
       </div>
-      <div className="h-48 w-full bg-white"></div>
+      <div className="w-full bg-white">
+        <GoogleMap
+          key="firstPage"
+          center={{ lat: -37.8327787, lng: 144.996298 }}
+          zoom={15}
+        />
+      </div>
     </main>
   );
 }
