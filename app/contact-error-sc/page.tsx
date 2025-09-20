@@ -2,14 +2,14 @@ import Image from "next/image";
 
 import TeamMemberImage from "@/assets/img_elise-n-dan.png";
 import FrankBodyImage from "@/assets/img_frank-body.jpg";
-import ContactForm from "@/components/ContactForm";
+import ContactForm from "@/components/ContactForm/ContactForm";
 import GoogleMap from "@/components/Map";
 
 import { CONTACT_FORM_ENDPOINT, CONTACT_FORM_THANK_YOU_URL } from "./constants";
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen overflow-hidden bg-linear-to-bl from-[#417EDF] to-[#3B70BD] pt-32 xl:pt-56">
+    <div className="min-h-screen overflow-hidden bg-linear-to-bl from-[#417EDF] to-[#3B70BD] pt-32">
       <div className="relative container mx-auto max-w-[70rem] xl:pb-20">
         <header className="relative z-10 mb-10 flex w-full flex-col items-center px-4 xl:mb-16 xl:px-0">
           <h1 className="mb-4 text-left text-[2.125rem] leading-[2.125rem] font-bold text-white xl:text-center xl:text-[3.25rem] xl:leading-[3.25rem]">
@@ -69,6 +69,6 @@ export default function ContactPage() {
           zoom={15}
         />
       </div>
-    </main>
+    </div>
   );
 }

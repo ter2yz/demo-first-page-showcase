@@ -44,16 +44,22 @@ npm run format:fix
 
 ## 🌏 Environment Setup (Google Maps)
 
-Copy `.env.example` to `.env.local` and fill in your Google Maps API credentials:
+Copy `.env.example` to `.env` and fill in your Google Maps API credentials:
 
 ```bash
-cp .env.example .env.local
+cp .env.example .env
 ```
 
 ```
 NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_api_key_here
 NEXT_PUBLIC_GOOGLE_MAP_ID=your_map_id_here
 ```
+
+**Notes:**
+
+- The API key already has appropriate restrictions set up in Google Cloud Platform (GCP) for security.
+- Google Map Id is required for custom map styling and custom map pointers.
+- Google Maps in this app uses the `mapId` for advanced map styling; you can configure map styles in GCP under Map Management.
 
 ## 📬 Contact Form API Route Details
 
