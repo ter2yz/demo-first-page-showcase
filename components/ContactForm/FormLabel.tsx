@@ -2,9 +2,7 @@ import React from "react";
 
 import { cn } from "@/lib/utils";
 
-interface FormLabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
-  children: React.ReactNode;
-}
+import { FormLabelProps } from "./types";
 
 export function FormLabel({ children, className, ...props }: FormLabelProps) {
   return (

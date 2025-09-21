@@ -49,7 +49,7 @@ export default function ContactForm({
     let cancelled = false;
 
     if (status === "success") {
-      toast.success("Form submit successfully!");
+      toast.success(message);
     }
 
     if (status === "error") {
@@ -60,9 +60,7 @@ export default function ContactForm({
       toast.error(
         () => (
           <div className="relative w-full">
-            <p className="mb-2">
-              Error occurred while submitting the form. Redirecting in 5s...
-            </p>
+            <p className="mb-2">{message} Redirecting in 5s...</p>
             <div className="animate-shrink h-2 w-full rounded-3xl bg-white"></div>
           </div>
         ),
@@ -106,7 +104,7 @@ export default function ContactForm({
 
       if (result.success) {
         setStatus("success");
-        setMessage("Message sent successfully!");
+        setMessage("Form submit successfully!");
         reset();
         setFormattedContactNumber("");
       } else {
