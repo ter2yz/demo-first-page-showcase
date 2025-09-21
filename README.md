@@ -70,10 +70,9 @@ The API route at `app/api/contact/route.ts` acts as a backend-for-frontend (BFF)
 - Supports error simulation using the `forceError` query parameter (see `/contact-showcase` for an example of error handling in the UI).
 - Designed to be easily extended for real backend integration or additional server-side logic.
 
-## 📄 Pages
+## 🧪 API Error Simulation Toggle
 
-- `/contact`: Standard contact form page (normal user flow).
-- `/contact-showcase`: Demonstrates error handling by forcing the API to return an error (for interview review).
+A toggle is available on the homepage to simulate API errors. This allows you to easily test and demonstrate error handling in the contact form UI. When enabled, the form will force the API to return an error response.
 
 ---
 
