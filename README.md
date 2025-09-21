@@ -1,6 +1,8 @@
 # FirstPage Interview Assessment
 
-This project is an assessment for the FirstPage interview process.
+This project is an assessment for the FirstPage interview process. It's hosted on Netlify:
+
+👉 https://demo-fp.netlify.app
 
 ## 🚀 Tech Stack
 
