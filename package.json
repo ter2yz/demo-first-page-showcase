@@ -12,6 +12,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@netlify/functions": "^4.2.5",
+    "@radix-ui/react-switch": "^1.2.6",
     "@vis.gl/react-google-maps": "^1.5.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
